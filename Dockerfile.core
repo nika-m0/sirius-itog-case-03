@@ -1,0 +1,6 @@
+FROM alpine
+
+WORKDIR /app
+COPY core-service /app/core-service
+EXPOSE 80
+ENTRYPOINT ["/app/core-service"]

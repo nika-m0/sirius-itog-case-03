@@ -1,0 +1,6 @@
+FROM alpine
+
+WORKDIR /app
+COPY date-service /app/date-service
+EXPOSE 80
+ENTRYPOINT ["/app/date-service"]

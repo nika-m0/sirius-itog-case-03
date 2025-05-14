@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  loadbalancer:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - core-service
+      - date-service
+    restart: unless-stopped
+
+  core-service:
+    build:
+      context: ./bin
+      dockerfile: ../Dockerfile.core
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  date-service:
+    build:
+      context: ./bin
+      dockerfile: ../Dockerfile.date
+    expose:
+      - "80"
+    restart: unless-stopped
